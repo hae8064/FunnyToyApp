@@ -1,0 +1,15 @@
+.loginComponent {
+  border: 1px solid black;
+  width: 95%;
+  height: 31.25rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.loginTitle {
+  font-family: 'Humanbumsuk';
+  padding-top: 1.25rem;
+  font-weight: 600;
+  font-size: 1.375rem;
+}
