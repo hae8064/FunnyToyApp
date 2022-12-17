@@ -9,6 +9,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>
+      <div className="footerCopyRight">
+        CopyRight 2022. Bonghee All rights reserved.
+      </div>
     </div>
   );
 }

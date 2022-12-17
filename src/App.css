@@ -26,3 +26,9 @@
   font-size: 30px;
   color: #463f3a;
 }
+
+.footerCopyRight {
+  margin-top: 70px;
+  font-family: 'humanbumsuk';
+  color: grey;
+}
