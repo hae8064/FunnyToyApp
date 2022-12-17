@@ -17,7 +17,7 @@ const Login = () => {
       />
       <button className="loginButton">로그인</button>
       <Link to="/signUp" style={{ textDecoration: 'none', color: 'grey' }}>
-        <div className="signupText">email이 없으신가요?</div>
+        <div className="signupText">Email이 없으신가요?</div>
       </Link>
     </div>
   );
