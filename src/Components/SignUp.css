@@ -60,11 +60,38 @@
   font-size: 14px;
 }
 
-.emailCheckTextfalse {
+.emailCheckTexttrue {
   display: none;
 }
 
-.emailCheckTexttrue {
+.emailCheckTextfalse {
+  font-size: 14px;
+  color: lightcoral;
+}
+
+.pwdCheckTexttrue {
+  display: none;
+}
+
+.pwdCheckTextfalse {
+  font-size: 14px;
+  color: lightcoral;
+}
+
+.pwd2CheckTexttrue {
+  display: none;
+}
+
+.pwd2CheckTextfalse {
+  font-size: 14px;
+  color: lightcoral;
+}
+
+.signCheckTexttrue {
+  display: none;
+}
+
+.signCheckTextfalse {
   font-size: 14px;
   color: lightcoral;
 }
