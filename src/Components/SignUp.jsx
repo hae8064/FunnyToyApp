@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignUp.css';
+import axios from 'axios';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -62,6 +63,9 @@ const SignUp = () => {
     ) {
       console.log('회원가입  성공!');
       setSignPass(true);
+      const client = axios.create(); //axios기능 생성
+      const signUpDatas = [name, email, pwd];
+      client.post('/signUp', { signUpDatas });
     } else {
       setSignPass(false);
     }
