@@ -50,3 +50,12 @@
   margin-top: 10px;
   font-size: 14px;
 }
+
+.loginCheckTextfalse {
+  font-size: 14px;
+  color: lightcoral;
+}
+
+.loginCheckTexttrue {
+  display: none;
+}
