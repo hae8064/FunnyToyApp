@@ -95,3 +95,12 @@
   font-size: 14px;
   color: lightcoral;
 }
+
+.signCheckTexttrue {
+  display: none;
+}
+
+.signCheckTextfalse {
+  font-size: 14px;
+  color: lightcoral;
+}

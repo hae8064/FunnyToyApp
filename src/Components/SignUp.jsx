@@ -15,6 +15,8 @@ const SignUp = () => {
   const [pwdPass, setPwdPass] = useState(true);
   const [pwd2Pass, setPwd2Pass] = useState(true);
   const [signPass, setSignPass] = useState(true);
+  const [emailCheck, setEmailCheck] = useState(true);
+  const [routeLogin, setRouteLogin] = useState(false);
 
   //이름 state 저장
   const onNameChange = (e) => {
@@ -52,7 +54,7 @@ const SignUp = () => {
     setPwd2Pass(false);
   };
 
-  const onSignUpButton = () => {
+  const onSignUpButton = async () => {
     if (
       pwdPass === true &&
       pwd2Pass === true &&
@@ -65,7 +67,16 @@ const SignUp = () => {
       setSignPass(true);
       const client = axios.create(); //axios기능 생성
       const signUpDatas = [name, email, pwd];
-      client.post('/signUp', { signUpDatas });
+      // client.post('/signUp', { signUpDatas });
+      await client.post('/signUp', { signUpDatas }).then((res) => {
+        if (res.data === 'success') {
+          setEmailCheck(true);
+          window.location.replace('/');
+        } else if (res.data === 'fail') {
+          setEmailCheck(false);
+        }
+        console.log(res.data);
+      });
     } else {
       setSignPass(false);
     }
@@ -131,8 +142,12 @@ const SignUp = () => {
       <button className="signUpButton" onClick={onSignUpButton}>
         회원가입
       </button>
+
       <div className={`signCheckText${signPass}`}>
         회원가입에 실패하였습니다.
+      </div>
+      <div className={`signCheckText${emailCheck}`}>
+        중복된 Email이 있습니다.
       </div>
       <Link to="/" style={{ textDecoration: 'none', color: 'grey' }}>
         <div className="signInText">이미 가입된 Email이 있으신가요?</div>
