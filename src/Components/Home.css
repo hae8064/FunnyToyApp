@@ -48,3 +48,51 @@
   font-family: 'Humanbumsuk';
   font-size: 18px;
 }
+
+.homeBody {
+  background-color: #bcb8b1;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.memoContent {
+  display: flex;
+  height: 50px;
+  margin: 10px 10px;
+  border-radius: 10px;
+  background-color: rgb(218, 218, 96);
+  align-items: center;
+}
+
+.memoContentLeft {
+  display: flex;
+  align-items: center;
+}
+
+.memoContentLeft input {
+  width: 15px;
+  height: 15px;
+}
+
+.memoContentRight {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  justify-content: flex-start;
+}
+
+.memotitle {
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Humanbumsuk';
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.momoDate {
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Humanbumsuk';
+  color: grey;
+  font-size: 15px;
+}
