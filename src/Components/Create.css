@@ -11,3 +11,57 @@
   color: #463f3a;
   font-weight: 600;
 }
+
+.createBody {
+  margin: 10px 10px;
+}
+
+.titleHeader {
+  font-family: 'Humanbumsuk';
+  font-size: 20px;
+}
+
+.createBodyHeader {
+  display: flex;
+  width: 100%;
+}
+
+.createBodyHeader input {
+  margin-left: 10px;
+  width: 87%;
+  border: none;
+  background-color: #bcb8b1;
+  border-bottom: 1px solid;
+  font-family: 'Humanbumsuk';
+  font-size: 20px;
+}
+
+.createContent {
+  padding-left: 10px;
+  border: none;
+  margin-top: 10px;
+  height: 250px;
+  background-color: #8a817c;
+  width: 95%;
+  /* text-align: left; */
+  text-align: left;
+  vertical-align: text-top;
+  font-family: 'Humanbumsuk';
+  font-size: 20px;
+}
+
+.createContent::placeholder {
+  color: black;
+}
+
+.createStars {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.startTitle {
+  font-family: 'Humanbumsuk';
+  font-size: 20px;
+  margin-right: 50px;
+}
