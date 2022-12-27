@@ -65,3 +65,70 @@
   font-size: 20px;
   margin-right: 50px;
 }
+
+.createLocation {
+  margin-top: 10px;
+  display: flex;
+}
+
+.createLocationButton {
+  font-family: 'Humanbumsuk';
+  /* font-size: 20px; */
+  width: 70px;
+  height: 30px;
+  font-size: 18px;
+  color: lightgrey;
+  background-color: #463f3a;
+}
+
+.createLocationText {
+  width: 80%;
+  border-bottom: 1px solid;
+  font-family: 'Humanbumsuk';
+}
+
+.createLabelInput {
+  width: 70px;
+  height: 30px;
+  background-color: #463f3a;
+  color: lightgrey;
+  font-family: 'Humanbumsuk';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createInput {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.createImg {
+  margin-left: 20px;
+  width: 50px;
+  height: 50px;
+}
+
+.createBottom {
+  margin-top: 50px;
+}
+
+.createCancelButton {
+  margin-right: 20px;
+  width: 50px;
+  height: 30px;
+  background: #e0afa0;
+  font-family: 'Humanbumsuk';
+  color: black;
+  font-size: 19px;
+}
+
+.createSaveButton {
+  width: 50px;
+  height: 30px;
+  background-color: #463f3a;
+  font-family: 'Humanbumsuk';
+  font-size: 19px;
+  color: lightgrey;
+}
