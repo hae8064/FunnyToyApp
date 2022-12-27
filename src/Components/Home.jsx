@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
@@ -10,7 +11,9 @@ const Home = () => {
       <div className="homeTop">
         <div className="leftFetures">
           <button className="homeSerarchButton">검색</button>
-          <button className="homeCreateButton">생성</button>
+          <Link to="/home/create">
+            <button className="homeCreateButton">생성</button>
+          </Link>
         </div>
         <div className="rightFetures">
           <button className="homeDeleteButton">삭제</button>
