@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Create.css';
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
+import useGeolocation from '../hooks/useGeolocation.ts';
 
 const Create = () => {
   const { naver } = window;
+  const naverLocation = useGeolocation();
   const stars = [1, 2, 3, 4, 5];
   const [starColor, setStarColor] = useState('grey');
   const [title, setTitle] = useState('');
@@ -58,8 +60,8 @@ const Create = () => {
         location: new naver.maps.LatLng(
           // lat === undefined ? 37.3849483 : lat2,
           // lng === undefined ? 127.1229117 : lng2
-          37.3849483,
-          127.1229117
+          naverLocation.coordinates.lat.toFixed(4),
+          naverLocation.coordinates.lng.toFixed(4)
         ),
       },
       function (status, response) {
