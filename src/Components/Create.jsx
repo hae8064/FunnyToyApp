@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Create.css';
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 import useGeolocation from '../hooks/useGeolocation.ts';
+import axios from 'axios';
 
 const Create = () => {
   const { naver } = window;
@@ -41,7 +42,7 @@ const Create = () => {
   const starClick = (e) => {
     setCurrentStar(e);
     // setStarColor('yellow');
-    console.log(e);
+    console.log(imgFile);
   };
 
   const saveImgFile = () => {
@@ -78,6 +79,13 @@ const Create = () => {
   //저장 버튼 클릭 이벤트
   const onCreateButton = () => {
     //제목, 내용, 점수를 입력 안했으면 생성 불가능
+    if (title !== '' && content !== '' && currentStar !== 0) {
+      console.log('post디비에 저장');
+      const createPostDB = [title, content, currentStar, location, imgFile];
+      const postClient = axios.create();
+
+      postClient.post('/create', { postClient });
+    }
   };
 
   return (
