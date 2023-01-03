@@ -42,7 +42,6 @@ const Create = () => {
   const starClick = (e) => {
     setCurrentStar(e);
     // setStarColor('yellow');
-    console.log(imgFile);
   };
 
   const saveImgFile = () => {
@@ -80,12 +79,18 @@ const Create = () => {
   const onCreateButton = () => {
     //제목, 내용, 점수를 입력 안했으면 생성 불가능
     if (title !== '' && content !== '' && currentStar !== 0) {
-      console.log('post디비에 저장');
       const createPostDB = [title, content, currentStar, location, imgFile];
       const postClient = axios.create();
-
-      postClient.post('/create', { postClient });
+      postClient.post('/home/create', { createPostDB });
     }
+  };
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
   };
 
   return (
@@ -94,12 +99,13 @@ const Create = () => {
       <div className="createBody">
         <div className="createBodyHeader">
           <span className="titleHeader">제목</span>
-          <input type="text" />
+          <input type="text" onChange={onChangeTitle} />
         </div>
         <textarea
           type="textarea"
           className="createContent"
           placeholder="내용을 입력해주세요"
+          onChange={onChangeContent}
         ></textarea>
         <div className="createStars">
           <div className="startTitle">점수</div>
@@ -153,7 +159,9 @@ const Create = () => {
           <Link to="/home">
             <button className="createCancelButton">취소</button>
           </Link>
-          <button className="createSaveButton">저장</button>
+          <button className="createSaveButton" onClick={onCreateButton}>
+            저장
+          </button>
         </div>
       </div>
     </div>
