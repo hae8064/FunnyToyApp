@@ -20,6 +20,11 @@ const Login = () => {
     const client = axios.create(); //axios기능 생성
     const loginDatas = [email, pwd];
 
+    //test 파라미터 id
+    const res = await axios.get('/');
+    const users = res.data;
+    console.log(users);
+
     await client.post('/', { loginDatas }).then((res) => {
       // if (res.data === 'success') {
       //   setEmailCheck(true);
@@ -28,6 +33,7 @@ const Login = () => {
       //   setEmailCheck(false);
       // }
       // console.log(res.data);
+      console.log('과연 데이터는 ?', res.data);
       if (res.data === 'success') {
         window.location.replace('/home');
         setLoginCheck(true);

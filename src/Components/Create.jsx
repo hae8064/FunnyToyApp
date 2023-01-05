@@ -16,28 +16,8 @@ const Create = () => {
   const [currentStar, setCurrentStar] = useState(0);
   const [imgFile, setImgFile] = useState('');
   const [location, setLocation] = useState([]);
+  const [fileData, setFileData] = useState('');
   const imgRef = useRef();
-
-  // useEffect(() => {
-  //   naver.maps.Service.reverseGeocode(
-  //     {
-  //       location: new naver.maps.LatLng(
-  //         // lat === undefined ? 37.3849483 : lat2,
-  //         // lng === undefined ? 127.1229117 : lng2
-  //         37.3849483,
-  //         127.1229117
-  //       ),
-  //     },
-  //     function (status, response) {
-  //       if (status !== naver.maps.Service.Status.OK) {
-  //         return alert('Something Wrong!');
-  //       }
-
-  //       const result = response.result;
-  //       setLocation(result.items[0].address);
-  //     }
-  //   );
-  // }, []);
 
   const starClick = (e) => {
     setCurrentStar(e);
@@ -46,6 +26,7 @@ const Create = () => {
 
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
+    setFileData(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -77,11 +58,24 @@ const Create = () => {
 
   //저장 버튼 클릭 이벤트
   const onCreateButton = () => {
+    const formData = new FormData();
+    formData.append('imgFile', fileData);
     //제목, 내용, 점수를 입력 안했으면 생성 불가능
     if (title !== '' && content !== '' && currentStar !== 0) {
-      const createPostDB = [title, content, currentStar, location, imgFile];
+      const createPostDB = [title, content, currentStar, location];
       const postClient = axios.create();
       postClient.post('/home/create', { createPostDB });
+      const imgFile = axios.create();
+      imgFile.post('/home/create', formData, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+        transformRequest: [
+          () => {
+            return formData;
+          },
+        ],
+      });
     }
   };
 
