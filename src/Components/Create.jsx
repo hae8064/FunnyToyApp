@@ -69,7 +69,9 @@ const Create = () => {
       const createPostDB = [title, content, currentStar, location, userId];
       const postClient = axios.create();
       await postClient.post('/home/create', { createPostDB }).then((res) => {
-        navigate('/home', { state: { memo: res.data } });
+        navigate(`/home/${currentLocation.pathname.split('/')[2]}`, {
+          state: { memo: res.data },
+        });
       });
 
       const imgFile = axios.create();
