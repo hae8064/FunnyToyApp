@@ -7,13 +7,13 @@ const Home = ({ props }) => {
   const [memo, setMemo] = useState(0);
   const location = useLocation();
   const memoData = location.state;
-  console.log(memoData);
+  console.log(location.pathname);
   return (
     <div className="homeComponent">
       <div className="homeTop">
         <div className="leftFetures">
           <button className="homeSerarchButton">검색</button>
-          <Link to={`/home/:id/create`}>
+          <Link to={`${location.pathname}/create`}>
             <button className="homeCreateButton">생성</button>
           </Link>
         </div>
