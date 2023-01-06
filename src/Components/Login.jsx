@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Login.css';
+import '../styles/Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');

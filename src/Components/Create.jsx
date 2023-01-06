@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Create.css';
+import '../styles/Create.css';
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 import useGeolocation from '../hooks/useGeolocation.ts';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
   const { naver } = window;
@@ -18,6 +19,7 @@ const Create = () => {
   const [location, setLocation] = useState([]);
   const [fileData, setFileData] = useState('');
   const imgRef = useRef();
+  const navigate = useNavigate();
 
   const starClick = (e) => {
     setCurrentStar(e);
@@ -57,14 +59,17 @@ const Create = () => {
   };
 
   //저장 버튼 클릭 이벤트
-  const onCreateButton = () => {
+  const onCreateButton = async () => {
     const formData = new FormData();
     formData.append('imgFile', fileData);
     //제목, 내용, 점수를 입력 안했으면 생성 불가능
     if (title !== '' && content !== '' && currentStar !== 0) {
       const createPostDB = [title, content, currentStar, location];
       const postClient = axios.create();
-      postClient.post('/home/create', { createPostDB });
+      await postClient.post('/home/create', { createPostDB }).then((res) => {
+        navigate('/home', { state: { memo: res.data } });
+      });
+
       const imgFile = axios.create();
       imgFile.post('/home/create', formData, {
         headers: {
@@ -77,6 +82,8 @@ const Create = () => {
         ],
       });
     }
+
+    // window.location.href = '/home';
   };
 
   const onChangeTitle = (e) => {

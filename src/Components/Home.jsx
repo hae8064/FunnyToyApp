@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css';
+import { Link, useLocation } from 'react-router-dom';
+import '../styles/Home.css';
 
-const Home = () => {
+const Home = ({ props }) => {
   const [memo, setMemo] = useState(0);
-
+  const location = useLocation();
+  const memoData = location.state;
+  console.log(memoData);
   return (
     <div className="homeComponent">
       <div className="homeTop">
