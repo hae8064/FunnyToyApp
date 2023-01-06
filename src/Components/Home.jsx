@@ -13,7 +13,7 @@ const Home = ({ props }) => {
       <div className="homeTop">
         <div className="leftFetures">
           <button className="homeSerarchButton">검색</button>
-          <Link to="/home/create">
+          <Link to={`/home/:id/create`}>
             <button className="homeCreateButton">생성</button>
           </Link>
         </div>

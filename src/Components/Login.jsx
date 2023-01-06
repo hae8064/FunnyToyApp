@@ -23,23 +23,23 @@ const Login = () => {
     //test 파라미터 id
     const res = await axios.get('/');
     const users = res.data;
-    console.log(users);
 
     await client.post('/', { loginDatas }).then((res) => {
-      // if (res.data === 'success') {
-      //   setEmailCheck(true);
-      //   window.location.replace('/');
-      // } else if (res.data === 'fail') {
-      //   setEmailCheck(false);
-      // }
-      // console.log(res.data);
       console.log('과연 데이터는 ?', res.data);
-      if (res.data === 'success') {
-        window.location.replace('/home');
+      const userId = res.data.data.iduser;
+      if (res.data !== null) {
+        window.location.replace(`/home/:${userId}`);
         setLoginCheck(true);
-      } else if (res.data === 'fail') {
+      } else if (res.data === null) {
         setLoginCheck(false);
       }
+
+      // if (res.data === 'success') {
+      //   window.location.replace('/home/{userId}');
+      //   setLoginCheck(true);
+      // } else if (res.data === 'fail') {
+      //   setLoginCheck(false);
+      // }
     });
   };
 

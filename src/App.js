@@ -12,8 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/home/create" element={<Create />} />
+        <Route path="/home/:id" element={<Home />} />
+        <Route path="/home/:id/create" element={<Create />} />
       </Routes>
       <div className="footerCopyRight">
         CopyRight 2022. Bonghee All rights reserved.
