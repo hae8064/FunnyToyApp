@@ -22,9 +22,11 @@
   font-weight: normal;
   font-style: normal;
   font-weight: 600;
-  padding-top: 1.875rem;
   font-size: 30px;
   color: #463f3a;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .footerCopyRight {

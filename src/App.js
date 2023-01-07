@@ -9,7 +9,7 @@ import MemoDetail from './Components/MemoDetail';
 function App() {
   return (
     <div className="App">
-      <div className="header">Funny Toy App</div>
+      <div className="header">나만의 맛집</div>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />

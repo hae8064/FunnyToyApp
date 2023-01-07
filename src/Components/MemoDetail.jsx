@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/MemoDetail.css';
 const MemoDetail = () => {
-  const [currentStar, setCurrentStar] = useState(3);
-  const stars = [1, 2, 3, 4, 5];
   const currentLocation = useLocation();
+  const [currentStar, setCurrentStar] = useState(currentLocation.state.score);
+  const stars = [1, 2, 3, 4, 5];
   //useRffect 사용해서 처음 렌더링 될 때, setCurrentStar점수를 홈 화면에서 가져온 데이터 넣기
+
+  const title = currentLocation.state.title;
+  const content = currentLocation.state.content;
+  const location = currentLocation.state.location;
 
   return (
     <div className="memoDetailComponent">
@@ -14,14 +18,14 @@ const MemoDetail = () => {
         <div className="memoDetailBodyHeader">
           <input
             type="text"
-            value="제목 결과값"
+            value={title}
             className="memoBodyHeaderTitleValue"
           />
         </div>
         <textarea
           type="textarea"
           className="memoDetailContent"
-          value="내용 결과값"
+          value={content}
         ></textarea>
         <div className="memoDetailStars">
           {stars.map((star, idx) => (
@@ -50,16 +54,16 @@ const MemoDetail = () => {
           ))}
         </div>
         <div className="memoDetailLocation">
-          <div className="memoDetailLocationText">금천구</div>
+          <div className="memoDetailLocationText">{location}</div>
         </div>
         <div className="memoDetailCreateInput">
           <img src="" alt="이미지사진" />
         </div>
         <div className="memoDetailBottom">
+          <button className="memoDetailUpdate">수정</button>
           <Link to={`/home/${currentLocation.pathname.split('/')[2]}`}>
             <button className="memoDetailCheck">확인</button>
           </Link>
-          <button className="memoDetailUpdate">수정</button>
         </div>
       </div>
     </div>

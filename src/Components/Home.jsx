@@ -38,7 +38,14 @@ const Home = ({ props }) => {
             key={idx}
             className="memoContent"
             onClick={() => {
-              navigate(`${location.pathname}/detail/${data.boardId}`);
+              navigate(`${location.pathname}/detail/${data.boardId}`, {
+                state: {
+                  title: data.boardTitle,
+                  content: data.boardContent,
+                  score: data.boardScore,
+                  location: data.boardLocation,
+                },
+              });
               console.log(data);
             }}
           >
