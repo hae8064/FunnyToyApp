@@ -1,0 +1,100 @@
+.memoDetailComponent {
+  background-color: #bcb8b1;
+  width: 100%;
+  height: 650px;
+}
+
+.memoDetailDelecious {
+  font-family: 'Humanbumsuk';
+  margin-top: 10px;
+  font-size: 20px;
+  color: #463f3a;
+  font-weight: 600;
+}
+
+.memoDetailBody {
+  margin: 10px 10px;
+}
+
+.memoDetailBodyHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.memoBodyHeaderTitleValue {
+  width: 100%;
+  border: none;
+  background-color: #bcb8b1;
+  border-bottom: 1px solid;
+  font-family: 'Humanbumsuk';
+  font-size: 24px;
+  text-align: center;
+}
+
+.memoDetailContent {
+  padding-top: 20px;
+  padding-left: 10px;
+  border: none;
+  margin-top: 10px;
+  height: 250px;
+  background-color: #8a817c;
+  width: 95%;
+  /* text-align: left; */
+  text-align: left;
+  vertical-align: text-top;
+  font-family: 'Humanbumsuk';
+  font-size: 20px;
+}
+
+.memoDetailStars {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.memoDetailLocation {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.memoDetailLocationText {
+  width: 80%;
+  font-family: 'Humanbumsuk';
+  font-size: 21px;
+}
+
+.memoDetailCreateInput {
+  margin-top: 10px;
+}
+
+.memoDetailCreateInput img {
+  width: 100px;
+  height: 100px;
+}
+
+.memoDetailBottom {
+  margin-top: 30px;
+}
+
+.memoDetailCheck {
+  margin-right: 20px;
+  width: 50px;
+  height: 30px;
+  background-color: #463f3a;
+  color: lightgrey;
+  font-family: 'Humanbumsuk';
+  font-size: 19px;
+}
+
+.memoDetailUpdate {
+  width: 50px;
+  height: 30px;
+  font-family: 'Humanbumsuk';
+  background: #e0afa0;
+  color: black;
+
+  font-size: 19px;
+}

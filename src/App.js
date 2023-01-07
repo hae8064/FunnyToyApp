@@ -4,6 +4,7 @@ import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Home from './Components/Home';
 import Create from './Components/Create';
+import MemoDetail from './Components/MemoDetail';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/home/:id" element={<Home />} />
         <Route path="/home/:id/create" element={<Create />} />
+        <Route path="/home/:id/detail/:id" element={<MemoDetail />} />
       </Routes>
       <div className="footerCopyRight">
         CopyRight 2022. Bonghee All rights reserved.

@@ -161,7 +161,7 @@ const Create = () => {
           <img className="createImg" src={imgFile ?? imgFile} />
         </div>
         <div className="createBottom">
-          <Link to="/home">
+          <Link to={`/home/${currentLocation.pathname.split('/')[2]}`}>
             <button className="createCancelButton">취소</button>
           </Link>
           <button className="createSaveButton" onClick={onCreateButton}>

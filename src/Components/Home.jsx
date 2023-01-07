@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
 import moment from 'moment-timezone';
 import 'moment/locale/ko'; //대한민국
@@ -10,13 +10,12 @@ const Home = ({ props }) => {
   const [memo, setMemo] = useState([]);
   const location = useLocation();
   const memoData = location.state;
+  const navigate = useNavigate();
   // console.log(location.state);
 
   useEffect(() => {
     axios.get(`${location.pathname}}`).then((response) => {
       setMemo(response.data, ...memo);
-      // console.log(response);
-      console.log(memo);
     });
   }, []);
 
@@ -35,7 +34,14 @@ const Home = ({ props }) => {
       </div>
       <div className="homeBody">
         {memo.map((data, idx) => (
-          <div key={idx} className="memoContent">
+          <div
+            key={idx}
+            className="memoContent"
+            onClick={() => {
+              navigate(`${location.pathname}/detail/${data.boardId}`);
+              console.log(data);
+            }}
+          >
             <div className="memoContentLeft">
               <input type="checkbox" />
             </div>
@@ -46,20 +52,10 @@ const Home = ({ props }) => {
                   .subtract(9, 'hour')
                   .tz('Asia/Seoul')
                   .format('YYYY-MM-DD HH:mm')}
-                {/* {moment(data.boardCreated).format('YYYY-MM-DD HH:mm')} */}
               </div>
             </div>
           </div>
         ))}
-        <div className="memoContent">
-          <div className="memoContentLeft">
-            <input type="checkbox" />
-          </div>
-          <div className="memoContentRight">
-            <div className="memotitle">테스트 맛집 제목</div>
-            <div className="momoDate">테스트 맛집 방문 날짜</div>
-          </div>
-        </div>
       </div>
     </div>
   );
