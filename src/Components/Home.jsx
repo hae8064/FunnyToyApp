@@ -33,7 +33,7 @@ const Home = ({ props }) => {
         </div>
       </div>
       <div className="homeBody">
-        {memo.map((data, idx) => (
+        {memo.reverse().map((data, idx) => (
           <div
             key={idx}
             className="memoContent"
@@ -46,7 +46,6 @@ const Home = ({ props }) => {
                   location: data.boardLocation,
                 },
               });
-              console.log(data);
             }}
           >
             <div className="memoContentLeft">
