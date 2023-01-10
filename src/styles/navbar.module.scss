@@ -39,7 +39,15 @@
   background-color: #463f3a;
 }
 
+.menubar {
+  //   display: flex;
+  //   flex-direction: column;
+}
+
 .menubar ul {
   color: wheat;
   z-index: 1;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 25px;
 }

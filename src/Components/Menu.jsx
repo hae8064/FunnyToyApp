@@ -7,11 +7,11 @@ const Menu = ({ setShowMenu }) => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.menubar}>
-            <ul>게시판</ul>
+            <ul>Home</ul>
             <hr />
             <ul>지도</ul>
             <hr />
-            <ul>랜덤음식</ul>
+            <ul>랜덤추천</ul>
             <hr />
           </div>
         </div>
