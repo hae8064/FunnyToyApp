@@ -1,12 +1,12 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Home from './Components/Home';
 import Create from './Components/Create';
 import MemoDetail from './Components/MemoDetail';
 import { CSSTransition } from 'react-transition-group';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './styles/navbar.module.scss';
 import Menu from './Components/Menu';
@@ -14,6 +14,17 @@ import Menu from './Components/Menu';
 function App() {
   const [showButton, setShowButton] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setShowButton(false);
+    } else if (location.pathname === '/signUp') {
+      setShowButton(false);
+    } else {
+      setShowButton(true);
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -42,7 +53,14 @@ function App() {
             <Menu setShowMenu={setShowMenu} />
           </div>
         </CSSTransition>
-        <div className="headerTitle">나만의 맛집</div>
+        <div
+          className="headerTitle"
+          onClick={() => {
+            console.log(location);
+          }}
+        >
+          나만의 맛집
+        </div>
       </div>
 
       {/* {showButton && (
