@@ -38,17 +38,20 @@ const Home = ({ props }) => {
   //삭제 버튼
   const onDeleteButton = (data) => {
     console.log(deleteMemo);
-    axios.delete('/home/delete', {
-      data: {
-        boardId: deleteMemo,
-      },
-    });
+    axios
+      .delete('/home/delete', {
+        data: {
+          boardId: deleteMemo,
+        },
+      })
+      .then((res) => {
+        window.location.replace(`${location.pathname}}`);
+      });
     // .then((res) => {
     //   data.map((item) =>
     //     setMemo(memo.filter((memo) => memo.boardId !== item))
     //   );
     // });
-    window.location.replace(`${location.pathname}}`);
     //   // setMemo(memo.filter((memo) => memo.boardId !== e.boardId));
     // });
     // forceUpdate();

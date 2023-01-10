@@ -10,8 +10,9 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  width: 100%;
 }
 
 .header {
@@ -26,11 +27,24 @@
   color: #463f3a;
   height: 50px;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .footerCopyRight {
   margin-top: 70px;
   font-family: 'humanbumsuk';
   color: grey;
+}
+
+.headerTitle {
+  position: absolute;
+}
+
+.headerIcon {
+  position: fixed;
+  left: 10px;
+  display: flex;
+  justify-items: flex-start;
 }
