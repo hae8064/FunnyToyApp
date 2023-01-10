@@ -25,7 +25,6 @@ const Login = () => {
     const users = res.data;
 
     await client.post('/', { loginDatas }).then((res) => {
-      console.log('과연 데이터는 ?', res.data);
       const userId = res.data.data.iduser;
       if (res.data !== null) {
         window.location.replace(`/home/:${userId}`);
