@@ -95,3 +95,28 @@
   color: grey;
   font-size: 15px;
 }
+
+.inputSearchfalse {
+  display: none;
+}
+
+.inputSearchtrue {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.inputSearchInput {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  height: 30px;
+  text-indent: 20px;
+  font-family: 'Humanbumsuk';
+  font-size: 18px;
+}
+
+.inputSearchInput:focus {
+  border: none;
+}

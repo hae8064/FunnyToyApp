@@ -5,6 +5,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
 import moment from 'moment-timezone';
 import 'moment/locale/ko'; //대한민국
+import { FaSearch } from 'react-icons/fa';
 
 const Home = ({ props }) => {
   const [memo, setMemo] = useState([]);
@@ -12,6 +13,7 @@ const Home = ({ props }) => {
   const memoData = location.state;
   const navigate = useNavigate();
   const [deleteMemo, setDeleteMemo] = useState([]);
+  const [searchInputView, setSearchInputView] = useState(false);
 
   useEffect(() => {
     axios.get(`${location.pathname}}`).then((response) => {
@@ -57,11 +59,18 @@ const Home = ({ props }) => {
     // forceUpdate();
   };
 
+  //검색 버튼 클릭 이벤트
+  const onSearchClick = () => {
+    setSearchInputView(!searchInputView);
+  };
+
   return (
     <div className="homeComponent">
       <div className="homeTop">
         <div className="leftFetures">
-          <button className="homeSerarchButton">검색</button>
+          <button className="homeSerarchButton" onClick={onSearchClick}>
+            검색
+          </button>
           <Link to={`${location.pathname}/create`}>
             <button className="homeCreateButton">생성</button>
           </Link>
@@ -71,6 +80,10 @@ const Home = ({ props }) => {
             삭제
           </button>
         </div>
+      </div>
+      <div className={`inputSearch` + searchInputView}>
+        <FaSearch />
+        <input type="text" placeholder="검색" className="inputSearchInput" />
       </div>
       <div className="homeBody">
         {memo.map((data, idx) => (
