@@ -14,6 +14,7 @@ const Home = ({ props }) => {
   const navigate = useNavigate();
   const [deleteMemo, setDeleteMemo] = useState([]);
   const [searchInputView, setSearchInputView] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     axios.get(`${location.pathname}}`).then((response) => {
@@ -47,7 +48,15 @@ const Home = ({ props }) => {
         },
       })
       .then((res) => {
-        window.location.replace(`${location.pathname}}`);
+        // navigate(location.pathname);
+
+        if (res) {
+          setDeleteMemo(
+            deleteMemo.filter((element) => element !== data.boardId),
+            ...deleteMemo
+          );
+        }
+        window.location.replace(location.pathname);
       });
     // .then((res) => {
     //   data.map((item) =>
@@ -61,7 +70,13 @@ const Home = ({ props }) => {
 
   //검색 버튼 클릭 이벤트
   const onSearchClick = () => {
+    console.log(location.pathname);
     setSearchInputView(!searchInputView);
+  };
+
+  //검색 버튼 onChange이벤트
+  const onSearchInput = (e) => {
+    setSearchValue(e.target.value);
   };
 
   return (
@@ -83,7 +98,12 @@ const Home = ({ props }) => {
       </div>
       <div className={`inputSearch` + searchInputView}>
         <FaSearch />
-        <input type="text" placeholder="검색" className="inputSearchInput" />
+        <input
+          type="text"
+          placeholder="검색"
+          className="inputSearchInput"
+          onChange={onSearchInput}
+        />
       </div>
       <div className="homeBody">
         {memo.map((data, idx) => (
