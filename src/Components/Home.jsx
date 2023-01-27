@@ -15,12 +15,25 @@ const Home = ({ props }) => {
   const [deleteMemo, setDeleteMemo] = useState([]);
   const [searchInputView, setSearchInputView] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+
+  //제목으로 검색 했을 때 데이터 출력을 위한 filter함수
+  let filtered = memo.filter((data) => {
+    return data.boardTitle
+      .replace(/(\s*)/g, '')
+      .toLowerCase()
+      .includes(searchValue.replace(/(\s*)/g, '').toLowerCase());
+  });
 
   useEffect(() => {
     axios.get(`${location.pathname}}`).then((response) => {
       setMemo(response.data.reverse(), ...memo);
     });
   }, []);
+
+  // useEffect(() => {
+  //   console.log(searchValue.replace(/(\s*)/g, ''));
+  // }, [searchValue]);
 
   const onCheckBoxButton = (e, data, idx) => {
     //체크가 활성화 되었을때
@@ -55,7 +68,9 @@ const Home = ({ props }) => {
         // window.location.replace(location.pathname);
       });
 
-    window.location.reload();
+    if (deleteMemo.length >= 1) {
+      window.location.reload();
+    }
   };
 
   //검색 버튼 클릭 이벤트
@@ -95,7 +110,82 @@ const Home = ({ props }) => {
           onChange={onSearchInput}
         />
       </div>
-      <div className="homeBody">
+
+      {filtered.length > 0 ? (
+        <div className="homeBody">
+          {filtered.map((data, idx) => (
+            <div key={idx} className="memoContent">
+              <div className="memoContentLeft">
+                <input
+                  type="checkbox"
+                  onChange={(e) => {
+                    onCheckBoxButton(e.target.checked, data, idx);
+                  }}
+                />
+              </div>
+              <div
+                className="memoContentRight"
+                onClick={() => {
+                  navigate(`${location.pathname}/detail/${data.boardId}`, {
+                    state: {
+                      title: data.boardTitle,
+                      content: data.boardContent,
+                      score: data.boardScore,
+                      location: data.boardLocation,
+                    },
+                  });
+                }}
+              >
+                <div className="memotitle">{data.boardTitle}</div>
+                <div className="memoDate">
+                  {moment(data.boardCreated)
+                    .subtract(9, 'hour')
+                    .tz('Asia/Seoul')
+                    .format('YYYY-MM-DD HH:mm')}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="homeBody">
+          {memo.map((data, idx) => (
+            <div key={idx} className="memoContent">
+              <div className="memoContentLeft">
+                <input
+                  type="checkbox"
+                  onChange={(e) => {
+                    onCheckBoxButton(e.target.checked, data, idx);
+                  }}
+                />
+              </div>
+              <div
+                className="memoContentRight"
+                onClick={() => {
+                  navigate(`${location.pathname}/detail/${data.boardId}`, {
+                    state: {
+                      title: data.boardTitle,
+                      content: data.boardContent,
+                      score: data.boardScore,
+                      location: data.boardLocation,
+                    },
+                  });
+                }}
+              >
+                <div className="memotitle">{data.boardTitle}</div>
+                <div className="memoDate">
+                  {moment(data.boardCreated)
+                    .subtract(9, 'hour')
+                    .tz('Asia/Seoul')
+                    .format('YYYY-MM-DD HH:mm')}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* <div className="homeBody">
         {memo.map((data, idx) => (
           <div key={idx} className="memoContent">
             <div className="memoContentLeft">
@@ -129,7 +219,7 @@ const Home = ({ props }) => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
