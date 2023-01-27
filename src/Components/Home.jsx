@@ -48,24 +48,14 @@ const Home = ({ props }) => {
         },
       })
       .then((res) => {
-        // navigate(location.pathname);
-
-        if (res) {
-          setDeleteMemo(
-            deleteMemo.filter((element) => element !== data.boardId),
-            ...deleteMemo
-          );
-        }
-        window.location.replace(location.pathname);
+        setDeleteMemo(
+          deleteMemo.filter((element) => element !== data.boardId),
+          ...deleteMemo
+        );
+        // window.location.replace(location.pathname);
       });
-    // .then((res) => {
-    //   data.map((item) =>
-    //     setMemo(memo.filter((memo) => memo.boardId !== item))
-    //   );
-    // });
-    //   // setMemo(memo.filter((memo) => memo.boardId !== e.boardId));
-    // });
-    // forceUpdate();
+
+    window.location.reload();
   };
 
   //검색 버튼 클릭 이벤트
