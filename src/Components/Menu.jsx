@@ -24,13 +24,19 @@ const Menu = ({ setShowMenu, pathName }) => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.menubar}>
-            <Link to={`/home/:${currentUserId}`}>
+            <Link
+              style={{ listStyle: 'none', textDecoration: 'none' }}
+              to={`/home/:${currentUserId}`}
+            >
               {/* <Link to={pathName}> */}
               {/* <ul onClick={() => setShowMenu(false)}>Home</ul> */}
               <ul onClick={homeClickEvent}>Home</ul>
             </Link>
             <hr />
-            <Link to={`/map/:${currentUserId}`}>
+            <Link
+              style={{ listStyle: 'none', textDecoration: 'none' }}
+              to={`/map/:${currentUserId}`}
+            >
               <ul onClick={homeClickEvent}>지도</ul>
             </Link>
             <hr />

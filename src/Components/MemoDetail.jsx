@@ -4,16 +4,18 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/MemoDetail.css';
 const MemoDetail = () => {
   const currentLocation = useLocation();
+  const [title, setTitle] = useState(currentLocation.state.title);
   const [currentStar, setCurrentStar] = useState(currentLocation.state.score);
   const stars = [1, 2, 3, 4, 5];
   //useRffect 사용해서 처음 렌더링 될 때, setCurrentStar점수를 홈 화면에서 가져온 데이터 넣기
 
-  const [title, setTitle] = useState(currentLocation.state.title);
   const [content, setContent] = useState(currentLocation.state.content);
   const location = currentLocation.state.location;
   const [updateActive, setUdateActive] = useState(false);
 
   const navigate = useNavigate();
+
+  console.log(currentLocation.state);
 
   //수정 버튼 클릭이벤트
   const onUpdateDetail = () => {
@@ -26,7 +28,7 @@ const MemoDetail = () => {
       })
       .then((res) => {
         if (res.data === '수정 성공') {
-          navigate();
+          navigate(-1);
         }
       });
   };

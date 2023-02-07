@@ -1,7 +1,8 @@
 import React from 'react';
+import { Inner } from './styles';
 
 const Map = () => {
-  return <div>지도 API</div>;
+  return <Inner>지도 API</Inner>;
 };
 
 export default Map;
