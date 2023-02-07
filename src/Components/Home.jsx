@@ -184,42 +184,6 @@ const Home = ({ props }) => {
           ))}
         </div>
       )}
-
-      {/* <div className="homeBody">
-        {memo.map((data, idx) => (
-          <div key={idx} className="memoContent">
-            <div className="memoContentLeft">
-              <input
-                type="checkbox"
-                onChange={(e) => {
-                  onCheckBoxButton(e.target.checked, data, idx);
-                }}
-              />
-            </div>
-            <div
-              className="memoContentRight"
-              onClick={() => {
-                navigate(`${location.pathname}/detail/${data.boardId}`, {
-                  state: {
-                    title: data.boardTitle,
-                    content: data.boardContent,
-                    score: data.boardScore,
-                    location: data.boardLocation,
-                  },
-                });
-              }}
-            >
-              <div className="memotitle">{data.boardTitle}</div>
-              <div className="memoDate">
-                {moment(data.boardCreated)
-                  .subtract(9, 'hour')
-                  .tz('Asia/Seoul')
-                  .format('YYYY-MM-DD HH:mm')}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 };

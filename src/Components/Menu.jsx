@@ -1,10 +1,23 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import styles from '../styles/navbar.module.scss';
-const Menu = ({ setShowMenu }) => {
+const Menu = ({ setShowMenu, pathName }) => {
   const location = useLocation();
-  const currentUserId = location.pathname.split('/')[2].split(':')[1];
+  let currentUserId = location.pathname.split('/')[2].split(':')[1];
+  const [currentId, setCurrentId] = useState(pathName);
+
+  useEffect(() => {
+    // setCurrentId(location.pathname.split('/')[2].split(':')[1]);
+  }, [pathName]);
+
   const params = useParams();
+
+  const homeClickEvent = () => {
+    setShowMenu(false);
+  };
+
   return (
     <div className={styles.menuComponent}>
       <div className={styles.dimmer} onClick={() => setShowMenu(false)} />
@@ -12,10 +25,14 @@ const Menu = ({ setShowMenu }) => {
         <div className={styles.wrapper}>
           <div className={styles.menubar}>
             <Link to={`/home/:${currentUserId}`}>
-              <ul onClick={() => setShowMenu(false)}>Home</ul>
+              {/* <Link to={pathName}> */}
+              {/* <ul onClick={() => setShowMenu(false)}>Home</ul> */}
+              <ul onClick={homeClickEvent}>Home</ul>
             </Link>
             <hr />
-            <ul>지도</ul>
+            <Link to={`/map/:${currentUserId}`}>
+              <ul onClick={homeClickEvent}>지도</ul>
+            </Link>
             <hr />
             <ul>랜덤추천</ul>
             <hr />

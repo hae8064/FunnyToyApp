@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './styles/navbar.module.scss';
 import Menu from './Components/Menu';
+import Map from './Pages/Map';
 
 function App() {
   const [showButton, setShowButton] = useState(true);
@@ -50,7 +51,7 @@ function App() {
           unmountOnExit
         >
           <div>
-            <Menu setShowMenu={setShowMenu} />
+            <Menu setShowMenu={setShowMenu} pathName={location.pathname} />
           </div>
         </CSSTransition>
         <div
@@ -68,6 +69,7 @@ function App() {
       )} */}
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/map/:id" element={<Map />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/home/:id" element={<Home />} />
         <Route path="/home/:id/create" element={<Create />} />

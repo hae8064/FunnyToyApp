@@ -26,7 +26,7 @@ const MemoDetail = () => {
       })
       .then((res) => {
         if (res.data === '수정 성공') {
-          navigate(-1);
+          navigate();
         }
       });
   };
