@@ -7,4 +7,9 @@ export const Inner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  .Title {
+    font-size: large;
+    font-weight: 600;
+  }
 `;

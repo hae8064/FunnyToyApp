@@ -37,7 +37,7 @@ const Menu = ({ setShowMenu, pathName }) => {
               style={{ listStyle: 'none', textDecoration: 'none' }}
               to={`/map/:${currentUserId}`}
             >
-              <ul onClick={homeClickEvent}>지도</ul>
+              <ul onClick={homeClickEvent}>주변 맛집</ul>
             </Link>
             <hr />
             <ul>랜덤추천</ul>
