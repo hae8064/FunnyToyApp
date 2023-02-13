@@ -12,4 +12,9 @@ export const Inner = styled.div`
     font-size: large;
     font-weight: 600;
   }
+
+  #map {
+    width: 100%;
+    height: 300px;
+  }
 `;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import NaverMapComponent from '../Components/NaverMapComponent';
 import { Inner } from './styles';
 
 const Map = () => {
@@ -9,6 +10,7 @@ const Map = () => {
   return (
     <Inner>
       <div className="Title">주변 맛집 리스트</div>
+      {/* <NaverMapComponent /> */}
     </Inner>
   );
 };
