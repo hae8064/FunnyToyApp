@@ -6,6 +6,7 @@ import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 import useGeolocation from '../hooks/useGeolocation.ts';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Create = () => {
   const { naver } = window;
@@ -22,6 +23,10 @@ const Create = () => {
   const navigate = useNavigate();
   const currentLocation = useLocation();
   const userId = +currentLocation.pathname.split('/')[2].split(':')[1];
+  const dispatch = useDispatch();
+  const locationState = useSelector((state) => {
+    return state.currentLocation.value;
+  });
 
   const starClick = (e) => {
     setCurrentStar(e);
@@ -40,11 +45,13 @@ const Create = () => {
 
   //위치 등록 버튼
   const onLocationButton = () => {
+    console.log(naverLocation.coordinates.lat.toFixed(4));
     naver.maps.Service.reverseGeocode(
       {
         location: new naver.maps.LatLng(
           // lat === undefined ? 37.3849483 : lat2,
           // lng === undefined ? 127.1229117 : lng2
+          (locationState.lati = naverLocation.coordinates.lat.toFixed(4)),
           naverLocation.coordinates.lat.toFixed(4),
           naverLocation.coordinates.lng.toFixed(4)
         ),
