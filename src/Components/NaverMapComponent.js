@@ -1,11 +1,34 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useGeolocation from '../hooks/useGeolocation.ts';
+import { currentSet } from '../store/locationSlice';
 
 const NaverMapComponent = () => {
-  useEffect(() => {
-    const { naver } = window;
+  const naverLocation = useGeolocation();
+  const dispatch = useDispatch();
+  const { naver } = window;
+  const [myLocation, setMyLocation] = useState({});
 
+  //현재 위치 가져오기
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setMyLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    } else {
+      window.alert('현재위치를 알수 없습니다.');
+    }
+  }, [myLocation]);
+
+  useEffect(() => {
     // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
-    const location = new naver.maps.LatLng(37.5656, 126.9769);
+    const location = new naver.maps.LatLng(
+      myLocation.latitude,
+      myLocation.longitude
+    );
     const mapOptions = {
       center: location,
       // 중앙에 배치할 위치
@@ -18,7 +41,7 @@ const NaverMapComponent = () => {
       position: location,
     });
   }, []);
-  return <div id="map" style={{ width: '100%', height: '400px' }} />;
+  return <div id="map" style={{ width: '100%', height: '350px' }} />;
 };
 
 export default NaverMapComponent;

@@ -7,6 +7,7 @@ import useGeolocation from '../hooks/useGeolocation.ts';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { currentSet } from '../store/locationSlice';
 
 const Create = () => {
   const { naver } = window;
@@ -51,7 +52,6 @@ const Create = () => {
         location: new naver.maps.LatLng(
           // lat === undefined ? 37.3849483 : lat2,
           // lng === undefined ? 127.1229117 : lng2
-          (locationState.lati = naverLocation.coordinates.lat.toFixed(4)),
           naverLocation.coordinates.lat.toFixed(4),
           naverLocation.coordinates.lng.toFixed(4)
         ),
