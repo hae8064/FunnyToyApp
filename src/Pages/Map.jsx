@@ -5,20 +5,20 @@ import { Inner } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentSet } from '../store/locationSlice';
 import useGeolocation from '../hooks/useGeolocation.ts';
-
+import { RiMapPin2Line } from 'react-icons/ri';
 const Map = () => {
+  const { naver } = window;
+  const [currentLocation, setCurrentLocation] = useState();
+  const naverLocation = useGeolocation();
+  const [splitLocation, setSplitLocation] = useState();
+
   //내 위치 가져오기 (리덕스 툴킷 사용)
   const dispatch = useDispatch();
   const locationState = useSelector((state) => {
     return state.currentLocation.value;
   });
-  const { naver } = window;
-  const [currentLocation, setCurrentLocation] = useState([]);
-  const naverLocation = useGeolocation();
 
   const onRefreshBtn = () => {
-    console.log(naverLocation.coordinates.lat.toFixed(4));
-
     naver.maps.Service.reverseGeocode(
       {
         location: new naver.maps.LatLng(
@@ -48,8 +48,18 @@ const Map = () => {
 
   return (
     <Inner>
-      <div className="Title">주변 맛집 리스트</div>
-      <button onClick={onRefreshBtn}>내 주변 조회</button>
+      <div className="topComponent">
+        <span className="Title">주변 맛집 목록</span>
+        <span className="currentLocation">
+          현재위치:{' '}
+          {currentLocation !== undefined
+            ? currentLocation.split(' ')[1] +
+              ' ' +
+              currentLocation.split(' ')[2]
+            : '위치 정보 없음'}
+        </span>
+        <RiMapPin2Line className="searchIcon" onClick={onRefreshBtn} />
+      </div>
       <NaverMapComponent />
     </Inner>
   );

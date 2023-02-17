@@ -45,7 +45,7 @@ const NaverMapComponent = () => {
       currentSet({ lat: myLocation.latitude, lng: myLocation.longitude })
     );
   }, [myLocation]);
-  return <div id="map" style={{ width: '100%', height: '350px' }} />;
+  return <div id="map" style={{ width: '100%', height: '100%' }} />;
 };
 
 export default NaverMapComponent;
