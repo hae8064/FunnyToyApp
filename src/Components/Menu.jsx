@@ -3,18 +3,42 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import styles from '../styles/navbar.module.scss';
+import useGeolocation from '../hooks/useGeolocation.ts';
+import { useStore } from '../store/zustandStore';
+
 const Menu = ({ setShowMenu, pathName }) => {
   const location = useLocation();
   let currentUserId = location.pathname.split('/')[2].split(':')[1];
   const [currentId, setCurrentId] = useState(pathName);
-
-  useEffect(() => {
-    // setCurrentId(location.pathname.split('/')[2].split(':')[1]);
-  }, [pathName]);
-
   const params = useParams();
+  const { naver } = window;
+  const [currentLocation, setCurrentLocation] = useState();
+  const naverLocation = useGeolocation();
+
+  const { myLocation, locationSet } = useStore();
 
   const homeClickEvent = () => {
+    naver.maps.Service.reverseGeocode(
+      {
+        location: new naver.maps.LatLng(
+          naverLocation.coordinates.lat.toFixed(4),
+          naverLocation.coordinates.lng.toFixed(4)
+        ),
+        orders: [
+          naver.maps.Service.OrderType.ADDR,
+          naver.maps.Service.OrderType.ROAD_ADDR,
+        ].join(','),
+      },
+      function (status, response) {
+        const result = response;
+        setCurrentLocation(result.result.items[0].address);
+        locationSet(
+          result.result.items[0].address.split(' ')[1] +
+            ' ' +
+            result.result.items[0].address.split(' ')[2]
+        );
+      }
+    );
     setShowMenu(false);
   };
 

@@ -7,6 +7,7 @@ export const Inner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
   .topComponent {
     display: flex;
     flex-direction: column;
@@ -30,5 +31,15 @@ export const Inner = styled.div`
       transform: translate(-10%, -50%);
       right: 10px;
     }
+  }
+
+  .deleciousList {
+    position: absolute;
+    border: 1px solid red;
+    width: 100%;
+    bottom: 0px;
+    z-index: 1;
+    background-color: white;
+    height: 110px;
   }
 `;

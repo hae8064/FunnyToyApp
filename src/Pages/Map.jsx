@@ -6,11 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { currentSet } from '../store/locationSlice';
 import useGeolocation from '../hooks/useGeolocation.ts';
 import { RiMapPin2Line } from 'react-icons/ri';
+import axios from 'axios';
+import { useStore } from '../store/zustandStore';
 const Map = () => {
   const { naver } = window;
   const [currentLocation, setCurrentLocation] = useState();
   const naverLocation = useGeolocation();
   const [splitLocation, setSplitLocation] = useState();
+  const [deleciousList, setDeleciousList] = useState([]);
 
   //내 위치 가져오기 (리덕스 툴킷 사용)
   const dispatch = useDispatch();
@@ -18,12 +21,13 @@ const Map = () => {
     return state.currentLocation.value;
   });
 
+  //zustand 상태관리
+  const { myLocation } = useStore();
+
   const onRefreshBtn = () => {
     naver.maps.Service.reverseGeocode(
       {
         location: new naver.maps.LatLng(
-          // lat === undefined ? 37.3849483 : lat2,
-          // lng === undefined ? 127.1229117 : lng2
           naverLocation.coordinates.lat.toFixed(4),
           naverLocation.coordinates.lng.toFixed(4)
         ),
@@ -42,9 +46,44 @@ const Map = () => {
   // 처음 렌더링시 서버로 API 요청
   // 서버에서 네이버 API 요청하기..
   useEffect(() => {
-    // dispatch(currentSet({ dada: 1, dsa: 2 }));
-    console.log('현재 주소: ' + currentLocation);
-  }, [currentLocation]);
+    // axios({
+    //   method: 'GET',
+    //   url: 'https://openapi.naver.com/v1/search/local?query=목동 음식점&display=5',
+    //   headers: {
+    //     // 'X-Naver-Client-Id': process.env.REACT_APP_CLID,
+    //     // 'X-Naver-Client-Secret': process.env.REACT_APP_ClSECRET,
+    //     'X-Naver-Client-Id': 'FZnbYScg8qKDrpS31uw2',
+    //     'X-Naver-Client-Secret': 'AAqHSHczVc',
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // const mapList = axios.create();
+    // mapList
+    //   .get('https://openapi.naver.com/v1/search/local', {
+    //     headers: {
+    //       'X-Naver-Client-Id': 'FZnbYScg8qKDrpS31uw2',
+    //       'X-Naver-Client-Secret': 'AAqHSHczVc',
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log('response', response);
+    //   });
+    console.log(myLocation);
+    axios
+      .get('/map/:id', {
+        params: { locationData: myLocation },
+      })
+      .then((res) => {
+        console.log(res.data.body);
+        // console.log(res);
+      });
+  }, []);
 
   return (
     <Inner>
@@ -60,6 +99,7 @@ const Map = () => {
         </span>
         <RiMapPin2Line className="searchIcon" onClick={onRefreshBtn} />
       </div>
+      <div className="deleciousList"></div>
       <NaverMapComponent />
     </Inner>
   );
