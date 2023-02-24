@@ -15,12 +15,6 @@ const Map = () => {
   const [splitLocation, setSplitLocation] = useState();
   const [deleciousList, setDeleciousList] = useState([]);
 
-  //내 위치 가져오기 (리덕스 툴킷 사용)
-  const dispatch = useDispatch();
-  const locationState = useSelector((state) => {
-    return state.currentLocation.value;
-  });
-
   //zustand 상태관리
   const { myLocation2, foodList, foodListSet } = useStore();
 
@@ -48,17 +42,6 @@ const Map = () => {
   useEffect(() => {
     console.log(myLocation2);
     console.log('zustand 맛집', foodList);
-    setSplitLocation('refresh');
-
-    // axios
-    //   .get('/map/:id', {
-    //     params: { locationData: myLocation2 },
-    //   })
-    //   .then((res) => {
-    //     let obj = JSON.parse(res.data.body);
-    //     setDeleciousList((data) => [...data, obj.items]);
-    //     foodListSet(obj.items);
-    //   });
   }, []);
 
   return (

@@ -30,19 +30,6 @@ const NaverMapComponent = () => {
           longitude: position.coords.longitude,
         });
         console.log('좌표:', position.coords.latitude);
-
-        axios
-          .get('/map/:id', {
-            params: {
-              locationData: {
-                myLocation2,
-              },
-            },
-          })
-          .then((res) => {
-            let obj = JSON.parse(res.data.body);
-            foodListSet(obj.items);
-          });
       });
     } else {
       window.alert('현재위치를 알수 없습니다.');

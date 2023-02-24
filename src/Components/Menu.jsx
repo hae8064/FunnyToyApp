@@ -33,18 +33,31 @@ const Menu = ({ setShowMenu, pathName }) => {
       },
       function (status, response) {
         const result = response;
-        setCurrentLocation(result.result.items[0].address);
-        locationSet2(
+        let locationValue =
           result.result.items[0].address.split(' ')[1] +
-            ' ' +
-            result.result.items[0].address.split(' ')[2]
-        );
+          ' ' +
+          result.result.items[0].address.split(' ')[2];
+        axios
+          .get('/map/:id', {
+            params: {
+              locationData: {
+                locationValue,
+                // myLocation2,
+              },
+            },
+          })
+          .then((res) => {
+            let obj = JSON.parse(res.data.body);
+            foodListSet(obj.items);
+          });
+
+        setCurrentLocation(result.result.items[0].address);
+        locationSet2(locationValue);
+        console.log('에러뜨는 위치??' + locationValue);
       }
     );
     setShowMenu(false);
   };
-
-  useEffect(() => {}, [myLocation]);
 
   return (
     <div className={styles.menuComponent}>
