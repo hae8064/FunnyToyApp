@@ -22,7 +22,7 @@ const Map = () => {
   });
 
   //zustand 상태관리
-  const { myLocation } = useStore();
+  const { myLocation2, foodList, foodListSet } = useStore();
 
   const onRefreshBtn = () => {
     naver.maps.Service.reverseGeocode(
@@ -46,57 +46,26 @@ const Map = () => {
   // 처음 렌더링시 서버로 API 요청
   // 서버에서 네이버 API 요청하기..
   useEffect(() => {
-    // axios({
-    //   method: 'GET',
-    //   url: 'https://openapi.naver.com/v1/search/local?query=목동 음식점&display=5',
-    //   headers: {
-    //     // 'X-Naver-Client-Id': process.env.REACT_APP_CLID,
-    //     // 'X-Naver-Client-Secret': process.env.REACT_APP_ClSECRET,
-    //     'X-Naver-Client-Id': 'FZnbYScg8qKDrpS31uw2',
-    //     'X-Naver-Client-Secret': 'AAqHSHczVc',
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    console.log(myLocation2);
+    console.log('zustand 맛집', foodList);
+    setSplitLocation('refresh');
 
-    // const mapList = axios.create();
-    // mapList
-    //   .get('https://openapi.naver.com/v1/search/local', {
-    //     headers: {
-    //       'X-Naver-Client-Id': 'FZnbYScg8qKDrpS31uw2',
-    //       'X-Naver-Client-Secret': 'AAqHSHczVc',
-    //     },
+    // axios
+    //   .get('/map/:id', {
+    //     params: { locationData: myLocation2 },
     //   })
-    //   .then((response) => {
-    //     console.log('response', response);
+    //   .then((res) => {
+    //     let obj = JSON.parse(res.data.body);
+    //     setDeleciousList((data) => [...data, obj.items]);
+    //     foodListSet(obj.items);
     //   });
-    console.log(myLocation);
-    axios
-      .get('/map/:id', {
-        params: { locationData: myLocation },
-      })
-      .then((res) => {
-        console.log(res.data.body);
-        // console.log(res);
-      });
   }, []);
 
   return (
     <Inner>
       <div className="topComponent">
         <span className="Title">주변 맛집 목록</span>
-        <span className="currentLocation">
-          현재위치:{' '}
-          {currentLocation !== undefined
-            ? currentLocation.split(' ')[1] +
-              ' ' +
-              currentLocation.split(' ')[2]
-            : '위치 정보 없음'}
-        </span>
+        <span className="currentLocation">현재위치: {myLocation2}</span>
         <RiMapPin2Line className="searchIcon" onClick={onRefreshBtn} />
       </div>
       <div className="deleciousList"></div>

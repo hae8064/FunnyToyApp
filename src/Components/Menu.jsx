@@ -5,6 +5,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import styles from '../styles/navbar.module.scss';
 import useGeolocation from '../hooks/useGeolocation.ts';
 import { useStore } from '../store/zustandStore';
+import axios from 'axios';
 
 const Menu = ({ setShowMenu, pathName }) => {
   const location = useLocation();
@@ -15,7 +16,8 @@ const Menu = ({ setShowMenu, pathName }) => {
   const [currentLocation, setCurrentLocation] = useState();
   const naverLocation = useGeolocation();
 
-  const { myLocation, locationSet } = useStore();
+  //zustand 상태관리
+  const { myLocation, locationSet2, foodListSet } = useStore();
 
   const homeClickEvent = () => {
     naver.maps.Service.reverseGeocode(
@@ -32,7 +34,7 @@ const Menu = ({ setShowMenu, pathName }) => {
       function (status, response) {
         const result = response;
         setCurrentLocation(result.result.items[0].address);
-        locationSet(
+        locationSet2(
           result.result.items[0].address.split(' ')[1] +
             ' ' +
             result.result.items[0].address.split(' ')[2]
@@ -41,6 +43,8 @@ const Menu = ({ setShowMenu, pathName }) => {
     );
     setShowMenu(false);
   };
+
+  useEffect(() => {}, [myLocation]);
 
   return (
     <div className={styles.menuComponent}>
