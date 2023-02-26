@@ -11,7 +11,8 @@ const NaverMapComponent = () => {
   const { naver } = window;
   const [myLocation, setMyLocation] = useState({});
   //zustand 상태관리
-  const { myLocation2, foodList, foodListSet } = useStore();
+  const { myLocation2, foodList, foodListSet, clickMarker, setClickMarker } =
+    useStore();
   const [otherLatLngs, setOtherLatLngs] = useState([]);
   const content = ['<div>', `<img src = ${user} alt = "사람"/>`, '</div>'].join(
     ''
@@ -62,6 +63,12 @@ const NaverMapComponent = () => {
       },
     });
 
+    function getClickHandler(seq) {
+      return function (e) {
+        setClickMarker(foodList[seq]);
+      };
+    }
+
     for (let i = 0; i < foodList.length; i++) {
       let tm128 = new naver.maps.Point(+foodList[i].mapx, +foodList[i].mapy);
       let latlng2 = naver.maps.TransCoord.fromTM128ToLatLng(tm128);
@@ -70,8 +77,12 @@ const NaverMapComponent = () => {
         map,
         position: new naver.maps.LatLng(latlng2),
       });
+      naver.maps.Event.addListener(otherMarkers, 'click', getClickHandler(i));
     }
   }, [myLocation, foodList]);
+
+  console.log(clickMarker);
+
   return <div id="map" style={{ width: '100%', height: '100%' }} />;
 };
 

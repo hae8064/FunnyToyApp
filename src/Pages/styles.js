@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Inner = styled.div`
-  height: 650px;
+  height: 750px;
   background-color: #bcb8b1;
   overflow-y: auto;
   width: 100%;
