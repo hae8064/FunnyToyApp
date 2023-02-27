@@ -6,6 +6,7 @@ import { currentSet } from '../store/locationSlice';
 import { useStore } from '../store/zustandStore';
 import user from '../imgs/icons8-user-32.png';
 import axios from 'axios';
+import Menu from './Menu';
 const NaverMapComponent = () => {
   const naverLocation = useGeolocation();
   const { naver } = window;
@@ -19,18 +20,14 @@ const NaverMapComponent = () => {
   );
 
   //맛집 목록 전체 좌표 변환
-  useEffect(() => {}, []);
-
   //현재 위치 가져오기
   useEffect(() => {
-    console.log('현위치:' + myLocation2);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setMyLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
-        console.log('좌표:', position.coords.latitude);
       });
     } else {
       window.alert('현재위치를 알수 없습니다.');
@@ -52,7 +49,6 @@ const NaverMapComponent = () => {
     };
     const map = new naver.maps.Map('map', mapOptions);
 
-    console.log('zus', foodList);
     let currentMarker = new naver.maps.Marker({
       map,
       position: location,
@@ -80,8 +76,6 @@ const NaverMapComponent = () => {
       naver.maps.Event.addListener(otherMarkers, 'click', getClickHandler(i));
     }
   }, [myLocation, foodList]);
-
-  console.log(clickMarker);
 
   return <div id="map" style={{ width: '100%', height: '100%' }} />;
 };

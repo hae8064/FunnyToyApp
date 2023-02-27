@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
-import Home from './Components/Home';
+import Home from './Pages/Home/Home';
 import Create from './Components/Create';
 import MemoDetail from './Components/MemoDetail';
 import { CSSTransition } from 'react-transition-group';
@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './styles/navbar.module.scss';
 import Menu from './Components/Menu';
-import Map from './Pages/Map';
+import Map from './Pages/Map/Map';
 import axios from 'axios';
 import { useStore } from './store/zustandStore';
 

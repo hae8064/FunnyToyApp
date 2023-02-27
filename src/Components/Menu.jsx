@@ -10,8 +10,6 @@ import axios from 'axios';
 const Menu = ({ setShowMenu, pathName }) => {
   const location = useLocation();
   let currentUserId = location.pathname.split('/')[2].split(':')[1];
-  const [currentId, setCurrentId] = useState(pathName);
-  const params = useParams();
   const { naver } = window;
   const [currentLocation, setCurrentLocation] = useState();
   const naverLocation = useGeolocation();
@@ -53,7 +51,6 @@ const Menu = ({ setShowMenu, pathName }) => {
 
         setCurrentLocation(result.result.items[0].address);
         locationSet2(locationValue);
-        console.log('에러뜨는 위치??' + locationValue);
       }
     );
     setShowMenu(false);
@@ -69,8 +66,6 @@ const Menu = ({ setShowMenu, pathName }) => {
               style={{ listStyle: 'none', textDecoration: 'none' }}
               to={`/home/:${currentUserId}`}
             >
-              {/* <Link to={pathName}> */}
-              {/* <ul onClick={() => setShowMenu(false)}>Home</ul> */}
               <ul onClick={homeClickEvent}>Home</ul>
             </Link>
             <hr />
@@ -80,8 +75,6 @@ const Menu = ({ setShowMenu, pathName }) => {
             >
               <ul onClick={homeClickEvent}>주변 맛집</ul>
             </Link>
-            <hr />
-            <ul>랜덤추천</ul>
             <hr />
           </div>
         </div>

@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import '../styles/Home.css';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import '../../styles/Home.css';
 import moment from 'moment-timezone';
-import 'moment/locale/ko'; //대한민국
+import 'moment/locale/ko';
 import { FaSearch } from 'react-icons/fa';
-import { useStore } from '../store/zustandStore';
+import { useStore } from '../../store/zustandStore';
 
 const Home = ({ props }) => {
   const [memo, setMemo] = useState([]);

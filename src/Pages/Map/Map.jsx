@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
-import NaverMapComponent from '../Components/NaverMapComponent';
+import NaverMapComponent from '../../Components/NaverMapComponent';
 import { Inner } from './styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { currentSet } from '../store/locationSlice';
-import useGeolocation from '../hooks/useGeolocation.ts';
+import useGeolocation from '../../hooks/useGeolocation.ts';
 import { RiMapPin2Line } from 'react-icons/ri';
-import axios from 'axios';
-import { useStore } from '../store/zustandStore';
+import { useStore } from '../../store/zustandStore';
 const Map = () => {
   const { naver } = window;
   const [currentLocation, setCurrentLocation] = useState();
   const naverLocation = useGeolocation();
-  const [splitLocation, setSplitLocation] = useState();
-  const [deleciousList, setDeleciousList] = useState([]);
 
   //zustand 상태관리
-  const { myLocation2, foodList, foodListSet } = useStore();
+  const { myLocation2, clickMarker } = useStore();
 
   const onRefreshBtn = () => {
     naver.maps.Service.reverseGeocode(
@@ -37,12 +31,10 @@ const Map = () => {
     );
   };
 
-  // 처음 렌더링시 서버로 API 요청
-  // 서버에서 네이버 API 요청하기..
-  useEffect(() => {
-    console.log(myLocation2);
-    console.log('zustand 맛집', foodList);
-  }, []);
+  //맛집 더보기 버튼 클릭 이벤트
+  const seeMoreBtn = () => {
+    window.open(clickMarker.link);
+  };
 
   return (
     <Inner>
@@ -51,7 +43,22 @@ const Map = () => {
         <span className="currentLocation">현재위치: {myLocation2}</span>
         <RiMapPin2Line className="searchIcon" onClick={onRefreshBtn} />
       </div>
-      <div className="deleciousList"></div>
+      <div className="deleciousList">
+        {!clickMarker.title ? (
+          <span className="nothingInfo">마커를 클릭 해 주세요.</span>
+        ) : (
+          <>
+            <div className="contents">
+              <h4 className="title">{clickMarker.title.split(' ')[0]}</h4>
+              <p className="category">{clickMarker.category}</p>
+              <p className="address">{clickMarker.roadAddress}</p>
+            </div>
+            <button className="infoBtn" onClick={seeMoreBtn}>
+              더보기
+            </button>
+          </>
+        )}
+      </div>
       <NaverMapComponent />
     </Inner>
   );
