@@ -109,6 +109,7 @@ const Home = ({ props }) => {
           </button>
         </div>
       </div>
+      
       <div className={`inputSearch` + searchInputView}>
         <FaSearch />
         <input

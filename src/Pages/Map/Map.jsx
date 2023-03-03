@@ -8,7 +8,6 @@ const Map = () => {
   const { naver } = window;
   const [currentLocation, setCurrentLocation] = useState();
   const naverLocation = useGeolocation();
-
   //zustand 상태관리
   const { myLocation2, clickMarker } = useStore();
 
@@ -49,7 +48,8 @@ const Map = () => {
         ) : (
           <>
             <div className="contents">
-              <h4 className="title">{clickMarker.title.split(' ')[0]}</h4>
+              {console.log(clickMarker.title.split(' ')[0].replace('<b>', '').replace('</b>', ' '))}
+              <h4 className="title">{clickMarker.title.split(' ')[0].replace('<b>', '').replace('</b>', ' ')}</h4>
               <p className="category">{clickMarker.category}</p>
               <p className="address">{clickMarker.roadAddress}</p>
             </div>

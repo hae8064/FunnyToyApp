@@ -22,15 +22,6 @@ function App() {
   const { myLocation2, locationSet, foodListSet } = useStore();
 
   const menuOnClick = () => {
-    // axios
-    //   .get('/map/:id', {
-    //     params: { locationData: myLocation2 },
-    //   })
-    //   .then((res) => {
-    //     let obj = JSON.parse(res.data.body);
-    //     foodListSet(obj.items);
-    //   });
-
     setShowMenu(true);
   };
 

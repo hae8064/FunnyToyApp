@@ -5,8 +5,7 @@ import useGeolocation from '../hooks/useGeolocation.ts';
 import { currentSet } from '../store/locationSlice';
 import { useStore } from '../store/zustandStore';
 import user from '../imgs/icons8-user-32.png';
-import axios from 'axios';
-import Menu from './Menu';
+
 const NaverMapComponent = () => {
   const naverLocation = useGeolocation();
   const { naver } = window;
@@ -22,6 +21,8 @@ const NaverMapComponent = () => {
   //맛집 목록 전체 좌표 변환
   //현재 위치 가져오기
   useEffect(() => {
+    console.log(foodList);
+    
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setMyLocation({
@@ -44,10 +45,23 @@ const NaverMapComponent = () => {
     const mapOptions = {
       center: location,
       // 중앙에 배치할 위치
-      zoom: 14,
+      zoom: 13,
       // 확대 단계
     };
     const map = new naver.maps.Map('map', mapOptions);
+
+    
+    for (let i = 0; i < foodList.length; i++) {
+      let tm128 = new naver.maps.Point(+foodList[i].mapx, +foodList[i].mapy);
+      let latlng2 = naver.maps.TransCoord.fromTM128ToLatLng(tm128);
+      console.log(latlng2._lat);
+
+      let otherMarkers = new naver.maps.Marker({
+        map,
+        position: new naver.maps.LatLng(latlng2._lat, latlng2._lng),
+      });
+      naver.maps.Event.addListener(otherMarkers, 'click', getClickHandler(i));
+    }
 
     let currentMarker = new naver.maps.Marker({
       map,
@@ -65,17 +79,7 @@ const NaverMapComponent = () => {
       };
     }
 
-    for (let i = 0; i < foodList.length; i++) {
-      let tm128 = new naver.maps.Point(+foodList[i].mapx, +foodList[i].mapy);
-      let latlng2 = naver.maps.TransCoord.fromTM128ToLatLng(tm128);
-
-      let otherMarkers = new naver.maps.Marker({
-        map,
-        position: new naver.maps.LatLng(latlng2),
-      });
-      naver.maps.Event.addListener(otherMarkers, 'click', getClickHandler(i));
-    }
-  }, [myLocation, foodList]);
+  }, [foodList]);
 
   return <div id="map" style={{ width: '100%', height: '100%' }} />;
 };

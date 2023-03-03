@@ -47,6 +47,7 @@ const Menu = ({ setShowMenu, pathName }) => {
           .then((res) => {
             let obj = JSON.parse(res.data.body);
             foodListSet(obj.items);
+            console.log(obj);
           });
 
         setCurrentLocation(result.result.items[0].address);
