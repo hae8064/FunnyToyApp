@@ -11,15 +11,12 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './styles/navbar.module.scss';
 import Menu from './Components/Menu';
 import Map from './Pages/Map/Map';
-import axios from 'axios';
-import { useStore } from './store/zustandStore';
 
 function App() {
   const [showButton, setShowButton] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
   //zustand 상태관리
-  const { myLocation2, locationSet, foodListSet } = useStore();
 
   const menuOnClick = () => {
     setShowMenu(true);
@@ -33,7 +30,7 @@ function App() {
     } else {
       setShowButton(true);
     }
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div className="App">

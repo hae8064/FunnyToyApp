@@ -6,19 +6,15 @@ import '../../styles/Home.css';
 import moment from 'moment-timezone';
 import 'moment/locale/ko';
 import { FaSearch } from 'react-icons/fa';
-import { useStore } from '../../store/zustandStore';
 
 const Home = ({ props }) => {
   const [memo, setMemo] = useState([]);
   const location = useLocation();
-  const memoData = location.state;
   const navigate = useNavigate();
   const [deleteMemo, setDeleteMemo] = useState([]);
   const [searchInputView, setSearchInputView] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
   //zustand 상태관리
-  const { myLocation, foodList, foodListSet } = useStore();
 
   //제목으로 검색 했을 때 데이터 출력을 위한 filter함수
   let filtered = memo.filter((data) => {
@@ -29,19 +25,10 @@ const Home = ({ props }) => {
   });
 
   useEffect(() => {
-    // axios;
-    // .get('/map/:id', {
-    //   params: { locationData: myLocation },
-    // })
-    // .then((res) => {
-    //   let obj = JSON.parse(res.data.body);
-    //   foodListSet(obj.items);
-    // });
-
     axios.get(`${location.pathname}}`).then((response) => {
       setMemo(response.data.reverse(), ...memo);
     });
-  }, []);
+  }, [memo, location.pathname]);
 
   const onCheckBoxButton = (e, data, idx) => {
     //체크가 활성화 되었을때

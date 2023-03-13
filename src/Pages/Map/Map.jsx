@@ -48,7 +48,6 @@ const Map = () => {
         ) : (
           <>
             <div className="contents">
-              {console.log(clickMarker.title.split(' ')[0].replace('<b>', '').replace('</b>', ' '))}
               <h4 className="title">{clickMarker.title.split(' ')[0].replace('<b>', '').replace('</b>', ' ')}</h4>
               <p className="category">{clickMarker.category}</p>
               <p className="address">{clickMarker.roadAddress}</p>

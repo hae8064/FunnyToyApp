@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [loginCheck, setLoginCheck] = useState(true);
+  const navigate = useNavigate();
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
@@ -20,14 +21,12 @@ const Login = () => {
     const client = axios.create(); //axios기능 생성
     const loginDatas = [email, pwd];
 
-    //test 파라미터 id
-    const res = await axios.get('/');
-    const users = res.data;
 
     await client.post('/', { loginDatas }).then((res) => {
       const userId = res.data.data.iduser;
       if (res.data !== null) {
-        window.location.replace(`/home/:${userId}`);
+        // window.location.replace(`/home/:${userId}`);
+        navigate(`/home/:${userId}`);
         setLoginCheck(true);
       } else if (res.data === null) {
         setLoginCheck(false);
